@@ -1,0 +1,49 @@
+## show available price plans
+GET http://localhost:4011/api/price-plans
+Content-Type: application/json
+
+### Calculate total phone bill
+
+POST http://localhost:4011/api/phonebill
+Content-Type: application/json
+
+{
+    
+  "plan_name": "call 201",
+  "actions": "call, sms, call, sms"
+}
+
+### Create a new price plan
+POST http://localhost:4011/api/price-plan/create
+Content-Type: application/json
+
+{
+    
+  "plan_name": "sms 101",
+  "sms_price": 0.5,
+  "call_price": 0.6
+}
+
+###Delete a price plan
+POST http://localhost:4011/api/price-plan/delete
+Content-Type: application/json
+
+{
+    
+ "id": 5
+}
+
+
+###Update price plans
+POST http://localhost:4011/api/price-plan/update
+Content-Type: application/json
+
+{
+    
+  "plan_name": "sms 101",
+  "sms_price": 2.0,
+  "call_price": 2.5
+}
+
+
+

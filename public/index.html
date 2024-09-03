@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+    <script src="alpine.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Tieho's Total Phone Bill</title>
+</head>
+
+<body>
+    <div x-data="totalPhoneBill" x-init="listPricePlans()">
+        
+             <div >
+            <h1 x-text="title"></h1>
+            <button @click=togglePricePlan>
+              <i><span x-text="showPricePlan ? 'Hide Plans' : 'Show Plans'"></span>
+            </button></i>  
+            <table x-show="showPricePlan">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>plan_name</th>
+                        <th>sms_price</th>
+                        <th>call_price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template x-for="plan in pricePlans">
+                        <tr>
+                            <td x-text="plan.id"></td>
+                            <td x-text="plan.plan_name"></td>
+                            <td x-text="plan.sms_price"></td>
+                            <td x-text="plan.call_price"></td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+
+        <div>
+            <p>What's my Total Phone Bill?</p>
+            <input type="text" placeholder="price-plan" x-model="plan">
+            <input type="text" placeholder="sms/call" x-model="actions">
+            <button @click="calculateTotal">Total</button>
+            <span x-text="total"></span>
+        </div>
+
+        <div >
+            <p>Create My Price Plans</p>
+            <input type="text" placeholder="plan_name" x-model="newPlan">
+            <input type="text" placeholder="sms_price" x-model="smsPrice">
+            <input type="text" placeholder="call_price" x-model="callPrice">
+            <button @click="createPricePlan">Create plan</button>
+            
+        </div>
+
+        <div >
+            <p>Price Plan Update</p>
+            <input type="text" placeholder="plan_name" x-model="existingPlan">
+            <input type="text" placeholder="new_sms_price" x-model="newSmsPrice">
+            <input type="text" placeholder="new_call_price" x-model="newCallPrice">
+            <button @click="updatePricePlan">Update</button>
+            <div x-show="message" x-text="message" class="message"></div>
+        </div>
+
+        <div>
+            <p>Delete a Price Plan</p>
+            <input type="text" placeholder="Enter ID to delete" x-model="planIdToDelete">
+            <button @click="deletePricePlan">Delete</button>
+            <div x-show="message" x-text="message" class="message"></div>
+        </div>
+    </div>
+        
+       
+</body>
+
+</html>
